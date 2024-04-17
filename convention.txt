@@ -1,0 +1,7 @@
+-----------------------------------------------------------------------------------------------------------------
+tên biến: chữ cái đầu viết thường, nếu có 2 từ trở lên thì chữ đầu tiên của từ thứ 2 trở đi viết hoa
+VD: const bodyParser, const example
+*tên biến của interface, repo, class thì theo quy tắc của function, class
+-----------------------------------------------------------------------------------------------------------------
+tên function, class: chữ cái đầu viết hoa, nếu có 2 từ trở lên thì chữ đầu tiên của từ thứ 2 trở đi viết hoa
+VD: function ExampleController, class ExampleClass
