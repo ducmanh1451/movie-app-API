@@ -8,4 +8,85 @@ module.exports = (movieRepo) => ({
       res.status(500).json({ error: error });
     }
   },
+
+  // create movie
+  async createMovie(req, res) {
+    try {
+      const {
+        movie_name,
+        genre,
+        director,
+        actors,
+        rating,
+        movie_type,
+        content,
+        poster,
+      } = req.body;
+      const currentDateTime = new Date();
+      // Thực hiện thêm bản ghi mới vào danh sách phim
+      const newMovie = await movieRepo.addNewMovie({
+        movie_name,
+        genre,
+        director,
+        actors,
+        rating,
+        movie_type,
+        content,
+        poster,
+        create_date: currentDateTime,
+        update_date: null,
+        delete_date: null,
+      });
+      res.status(200).json({ payload: newMovie });
+    } catch (error) {
+      res.status(500).json({ error: error });
+    }
+  },
+
+  // update movie
+  async updateMovie(req, res) {
+    try {
+      const _id = req.params._id;
+      const {
+        movie_name,
+        genre,
+        director,
+        actors,
+        rating,
+        movie_type,
+        content,
+        poster,
+      } = req.body;
+
+      const currentDateTime = new Date();
+      await movieRepo.updateMovie(_id, {
+        movie_name,
+        genre,
+        director,
+        actors,
+        rating,
+        movie_type,
+        content,
+        poster,
+        update_date: currentDateTime,
+      });
+      res.status(200).json({});
+    } catch (error) {
+      res.status(500).json({ error: error });
+    }
+  },
+
+  // delete movie
+  async deleteMovie(req, res) {
+    try {
+      const _id = req.params._id;
+      const currentDateTime = new Date();
+      await movieRepo.deleteMovie(_id, {
+        delete_date: currentDateTime,
+      });
+      res.status(200).json({});
+    } catch (error) {
+      res.status(500).json({ error: error });
+    }
+  },
 });
