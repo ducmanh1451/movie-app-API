@@ -5,6 +5,10 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  cinema_name: {
+    type: String,
+    required: true,
+  },
   room_name: {
     type: String,
     required: true,
