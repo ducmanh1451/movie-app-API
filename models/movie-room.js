@@ -27,9 +27,16 @@ const movieSchema = new mongoose.Schema({
         type: Number,
         required: true,
       },
-      selected: {
-        type: Boolean,
-        default: false,
+      seat_name: {
+        type: String,
+      },
+      row: {
+        type: Number,
+        required: true,
+      },
+      column: {
+        type: Number,
+        required: true,
       },
       type: {
         type: Number,
