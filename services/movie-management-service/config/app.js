@@ -9,10 +9,16 @@ const bodyParser = require("body-parser");
 // const handleError = require("../common/error");
 const connect = require("./database");
 
+// call cron jobs
+const { updateMovieTypeCron } = require("../cron-jobs/update-movie-type");
+
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(cors());
 app.use("/api/v1", route);
+
+// crons
+updateMovieTypeCron();
 
 app.use((err, req, res, next) => {
   // handleError(err, req, res);
