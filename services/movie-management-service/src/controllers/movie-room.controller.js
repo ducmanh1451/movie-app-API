@@ -71,4 +71,15 @@ module.exports = (movieRoomRepo) => ({
       res.status(500).json({ error: error });
     }
   },
+
+  // get movie rooms by cinema_id
+  async getMovieRoomsByCinemaId(req, res) {
+    try {
+      const cinema_id = req.params.cinema_id;
+      const movieRooms = await movieRoomRepo.getMovieRoomsByCinemaId(cinema_id);
+      res.status(200).json({ payload: movieRooms });
+    } catch (error) {
+      res.status(500).json({ error: error });
+    }
+  },
 });

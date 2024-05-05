@@ -1,3 +1,5 @@
+const { formatDate } = require("../../../../common/common");
+
 module.exports = (movieRepo) => ({
   // get all movies
   async getAllMovies(req, res) {
@@ -22,7 +24,10 @@ module.exports = (movieRepo) => ({
         content,
         poster,
       } = req.body;
+      const expected_start_date = formatDate(req.body.expected_start_date);
+      const expected_end_date = formatDate(req.body.expected_end_date);
       const currentDateTime = new Date();
+      
       // Thực hiện thêm bản ghi mới vào danh sách phim
       const newMovie = await movieRepo.addNewMovie({
         movie_name,
@@ -31,6 +36,8 @@ module.exports = (movieRepo) => ({
         actors,
         rating,
         movie_type,
+        expected_start_date,
+        expected_end_date,
         content,
         poster,
         create_date: currentDateTime,
@@ -57,6 +64,8 @@ module.exports = (movieRepo) => ({
         content,
         poster,
       } = req.body;
+      const expected_start_date = formatDate(req.body.expected_start_date);
+      const expected_end_date = formatDate(req.body.expected_end_date);
 
       const currentDateTime = new Date();
       await movieRepo.updateMovie(_id, {
@@ -66,6 +75,8 @@ module.exports = (movieRepo) => ({
         actors,
         rating,
         movie_type,
+        expected_start_date,
+        expected_end_date,
         content,
         poster,
         update_date: currentDateTime,

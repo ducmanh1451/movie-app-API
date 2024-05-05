@@ -40,16 +40,25 @@ module.exports = {
     }
   },
 
-  // delete 
+  // delete
   async deleteMovieRoom(_id, movieRoom) {
     const session = await mongoose.startSession();
     session.startTransaction();
     try {
-      return await MovieRoom.findByIdAndUpdate(_id, { $set: movieRoom }, { new: true });
+      return await MovieRoom.findByIdAndUpdate(
+        _id,
+        { $set: movieRoom },
+        { new: true }
+      );
     } catch (error) {
       await session.abortTransaction();
       session.endSession();
       throw error;
     }
+  },
+
+  // get movie rooms by cinema_id
+  async getMovieRoomsByCinemaId(cinema_id) {
+    return MovieRoom.find({ cinema_id: cinema_id }, { _id: 1, room_name: 1 });
   },
 };

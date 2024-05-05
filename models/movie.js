@@ -20,6 +20,12 @@ const movieSchema = new mongoose.Schema({
   movie_type: {
     type: Number,
   },
+  expected_start_date: {
+    type: Date,
+  },
+  expected_end_date: {
+    type: Date,
+  },
   content: {
     type: String,
   },
