@@ -26,6 +26,9 @@ const movieSchema = new mongoose.Schema({
   expected_end_date: {
     type: Date,
   },
+  movie_duration: {
+    type: Number,
+  },
   content: {
     type: String,
   },

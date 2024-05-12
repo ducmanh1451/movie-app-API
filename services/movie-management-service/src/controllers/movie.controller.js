@@ -21,11 +21,12 @@ module.exports = (movieRepo) => ({
         actors,
         rating,
         movie_type,
+        expected_start_date,
+        expected_end_date,
+        movie_duration,
         content,
         poster,
       } = req.body;
-      const expected_start_date = formatDate(req.body.expected_start_date);
-      const expected_end_date = formatDate(req.body.expected_end_date);
       const currentDateTime = new Date();
       
       // Thực hiện thêm bản ghi mới vào danh sách phim
@@ -38,6 +39,7 @@ module.exports = (movieRepo) => ({
         movie_type,
         expected_start_date,
         expected_end_date,
+        movie_duration,
         content,
         poster,
         create_date: currentDateTime,
@@ -61,11 +63,12 @@ module.exports = (movieRepo) => ({
         actors,
         rating,
         movie_type,
+        movie_duration,
+        expected_start_date,
+        expected_end_date,
         content,
         poster,
       } = req.body;
-      const expected_start_date = formatDate(req.body.expected_start_date);
-      const expected_end_date = formatDate(req.body.expected_end_date);
 
       const currentDateTime = new Date();
       await movieRepo.updateMovie(_id, {
@@ -77,6 +80,7 @@ module.exports = (movieRepo) => ({
         movie_type,
         expected_start_date,
         expected_end_date,
+        movie_duration,
         content,
         poster,
         update_date: currentDateTime,
