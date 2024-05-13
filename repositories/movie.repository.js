@@ -6,6 +6,17 @@ module.exports = {
   async getAllMovies() {
     return Movie.find({ delete_date: null });
   },
+
+  // get showing movies
+  async getShowingMovies() {
+    return Movie.find({ delete_date: null, movie_type: 1 });
+  },
+
+  // get upcoming movies
+  async getUpcomingMovies() {
+    return Movie.find({ delete_date: null, movie_type: 0 });
+  },
+
   // create movie
   async addNewMovie(movie) {
     const session = await mongoose.startSession();

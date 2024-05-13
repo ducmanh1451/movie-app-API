@@ -11,6 +11,26 @@ module.exports = (movieRepo) => ({
     }
   },
 
+  // get showing movies
+  async getShowingMovies(req, res) {
+    try {
+      const showingMovies = await movieRepo.getShowingMovies();
+      res.status(200).json({ payload: showingMovies });
+    } catch (error) {
+      res.status(500).json({ error: error });
+    }
+  },
+
+  // get upcoming movies
+  async getUpcomingMovies(req, res) {
+    try {
+      const upcomingMovies = await movieRepo.getUpcomingMovies();
+      res.status(200).json({ payload: upcomingMovies });
+    } catch (error) {
+      res.status(500).json({ error: error });
+    }
+  },
+
   // create movie
   async createMovie(req, res) {
     try {
