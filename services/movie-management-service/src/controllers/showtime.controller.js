@@ -9,6 +9,19 @@ module.exports = (showtimeRepo) => ({
     }
   },
 
+  // get showtimes by movie and date
+  async getShowtimesByMovieAndDate(req, res) {
+    try {
+      const { movie_id, date } = req.params;
+      // res.status(200).json({payload: {movie_id, date}})
+      // return
+      const showtimes = await showtimeRepo.getShowtimesByMovieAndDate(movie_id, date);
+      res.status(200).json({ payload: showtimes });
+    } catch (error) {
+      res.status(500).json({ error: error });
+    }
+  },
+
   // create
   async createShowtime(req, res) {
     try {

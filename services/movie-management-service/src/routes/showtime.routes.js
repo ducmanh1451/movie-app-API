@@ -8,4 +8,7 @@ router.post("/", controller.createShowtime);
 router.put("/:_id", controller.updateShowtime);
 router.delete("/:_id", controller.deleteShowtime);
 
+// sub routes
+router.get("/by-movie/:movie_id/by-date/:date", controller.getShowtimesByMovieAndDate);
+
 module.exports = router;
