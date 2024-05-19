@@ -1,23 +1,82 @@
 const mongoose = require("mongoose");
 
 const bookingSchema = new mongoose.Schema({
-  booking_name: {
+  cinema_id: {
     type: String,
     required: true,
   },
-//   address: {
-//     type: String,
-//     required: true,
-//   },
-//   phone_number: {
-//     type: String,
-//   },
-//   district: {
-//     type: String,
-//   },
-//   city: {
-//     type: String,
-//   },
+  cinema_name: {
+    type: String,
+    required: true,
+  },
+  room_id: {
+    type: String,
+    required: true,
+  },
+  room_name: {
+    type: String,
+    required: true,
+  },
+  movie_id: {
+    type: String,
+    required: true,
+  },
+  movie_name: {
+    type: String,
+    required: true,
+  },
+  expected_start_date: {
+    type: Date,
+    required: true,
+  },
+  expected_end_date: {
+    type: Date,
+    required: true,
+  },
+  opening_date: {
+    type: Date,
+    required: true,
+  },
+  opening_start_time: {
+    type: Date,
+    required: true,
+  },
+  opening_end_time: {
+    type: Date,
+    required: true,
+  },
+  seats: [
+    {
+      seat_id: {
+        type: Number,
+        required: true,
+      },
+      seat_name: {
+        type: String,
+      },
+      row: {
+        type: Number,
+        required: true,
+      },
+      column: {
+        type: Number,
+        required: true,
+      },
+      type: {
+        type: Number,
+        required: true,
+        default: 0,
+      },
+      available: {
+        type: Boolean,
+        default: true,
+      },
+      price: {
+        type: Number,
+        required: true,
+      },
+    },
+  ],
   create_date: {
     type: Date,
   },
@@ -29,6 +88,6 @@ const bookingSchema = new mongoose.Schema({
   },
 });
 
-const Booking = mongoose.model("booking", bookingSchema);
+const Booking = mongoose.model("bookings", bookingSchema);
 
 module.exports = Booking;

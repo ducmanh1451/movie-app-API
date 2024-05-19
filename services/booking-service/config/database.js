@@ -4,9 +4,9 @@ const connect = async () => {
   try {
     mongoose.Promise = global.Promise;
     mongoose.connect(process.env.HELPERS_SERVICE_URL, {
-      dbName: "booking_db", // Tên của database
+      dbName: "bookings_db", // Tên của database
     });
-    console.log("Connect database booking_db successfully");
+    console.log("Connect database bookings_db successfully");
   } catch (error) {
     console.log(error);
   }
