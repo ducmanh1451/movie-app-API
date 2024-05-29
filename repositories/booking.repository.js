@@ -2,6 +2,11 @@ const Booking = require("./../models/booking");
 const mongoose = require("mongoose");
 
 module.exports = {
+  // get all bookings
+  async getAllBookings() {
+    return Booking.find({ delete_date: null });
+  },
+
   // create
   async addNewBooking(bookings) {
     const session = await mongoose.startSession();
@@ -22,6 +27,8 @@ module.exports = {
           opening_end_time: booking.opening_end_time,
           opening_start_time: booking.opening_start_time,
           seats: booking.seats,
+          rows: booking.rows,
+          columns: booking.columns,
           create_date: new Date(),
           update_date: null,
           delete_date: null,

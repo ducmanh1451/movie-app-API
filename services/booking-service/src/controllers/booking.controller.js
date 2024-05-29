@@ -1,4 +1,14 @@
 module.exports = (bookingRepo) => ({
+  // get all
+  async getAllBookings(req, res) {
+    try {
+      const bookings = await bookingRepo.getAllBookings();
+      res.status(200).json({ payload: bookings });
+    } catch (error) {
+      res.status(500).json({ error: error });
+    }
+  },
+
   // create
   async createBooking(req, res) {
     try {
