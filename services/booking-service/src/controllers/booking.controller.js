@@ -33,4 +33,25 @@ module.exports = (bookingRepo) => ({
       res.status(500).json({ error: error });
     }
   },
+
+  // search
+  async searchBooking(req, res) {
+    try {
+      const { movieId, date } = req.query;
+      const bookings = await bookingRepo.searchBookings(movieId, date);
+      res.status(200).json({ bookings: bookings });
+    } catch (error) {
+      res.status(500).json({ error: error });
+    }
+  },
+
+  // find
+  async findBooking(req, res) {
+    try {
+      const booking = await bookingRepo.findBooking(req.params._id);
+      res.status(200).json({ booking: booking });
+    } catch (error) {
+      res.status(500).json({ error: error });
+    }
+  },
 });

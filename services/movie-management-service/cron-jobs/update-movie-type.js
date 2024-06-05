@@ -3,7 +3,8 @@ const Movie = require("../../../models/movie");
 
 const updateMovieTypeCron = () => {
   // Tạo cron job để log ra 123 mỗi 3 giây
-  cron.schedule("0 1 * * *", async () => {
+  cron.schedule("*/10 * * * * *", async () => {
+  // cron.schedule("0 1 * * *", async () => {
     try {
       // Lấy ngày hiện tại
       const currentDate = new Date();
@@ -13,6 +14,7 @@ const updateMovieTypeCron = () => {
         movie_type: 0,
         delete_date: null,
       });
+      // console.log(moviesToUpdate);
       // Cập nhật movie_type = 1 cho các bản ghi tìm được
       await Promise.all(
         moviesToUpdate.map(async (movie) => {

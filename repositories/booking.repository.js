@@ -63,4 +63,50 @@ module.exports = {
       throw error;
     }
   },
+
+  // search
+  async searchBookings(movieId, date) {
+    return Booking.aggregate([
+      {
+        $match: {
+          movie_id: movieId,
+          opening_date: new Date(date),
+          delete_date: null,
+        },
+      },
+      {
+        $group: {
+          _id: {
+            cinema_id: "$cinema_id",
+            cinema_name: "$cinema_name",
+            room_id: "$room_id",
+            room_name: "$room_name",
+            opening_date: "$opening_date",
+          },
+          opening_start_times: {
+            $push: {
+              opening_start_time: "$opening_start_time",
+              booking_id: "$_id",
+            },
+          },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          cinema_id: "$_id.cinema_id",
+          cinema_name: "$_id.cinema_name",
+          room_id: "$_id.room_id",
+          room_name: "$_id.room_name",
+          opening_date: "$_id.opening_date",
+          times: "$opening_start_times",
+        },
+      },
+    ]);
+  },
+
+  // find booking by id
+  async findBooking(bookingId) {
+    return Booking.find({ _id: bookingId, delete_date: null });
+  },
 };
