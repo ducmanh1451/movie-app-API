@@ -5,18 +5,32 @@ module.exports = {
   // get all showtimes
   async getAllShowtimes() {
     try {
+      const currentDate = new Date();
       const showtimes = await Showtime.find({ delete_date: null });
-      // count showtime detail
-      const showtimesWithCounts = await Promise.all(
-        showtimes.map(async (showtime) => {
-          const count = showtime.showtime_detail.length;
-          const opening_date =
-            showtime.showtime_detail.length > 0
-              ? showtime.showtime_detail[0].opening_date
-              : null;
-          return { ...showtime._doc, count, opening_date };
-        })
-      );
+      // // count showtime detail
+      // const showtimesWithCounts = await Promise.all(
+      //   showtimes.map(async (showtime) => {
+      //     const count = showtime.showtime_detail.length;
+      //     const opening_date =
+      //       showtime.showtime_detail.length > 0
+      //         ? showtime.showtime_detail[0].opening_date
+      //         : null;
+      //     return { ...showtime._doc, count, opening_date };
+      //   })
+      // );
+      // return showtimesWithCounts;
+      const showtimesWithCounts = [];
+      for (const showtime of showtimes) {
+        const count = showtime.showtime_detail.length;
+        const opening_date =
+          showtime.showtime_detail.length > 0
+            ? showtime.showtime_detail[0].opening_date
+            : null;
+        // Chỉ thêm vào mảng nếu opening_date >= currentDate
+        if (opening_date && opening_date >= currentDate) {
+          showtimesWithCounts.push({ ...showtime._doc, count, opening_date });
+        }
+      }
       return showtimesWithCounts;
     } catch (error) {
       console.error("Lỗi khi lấy tất cả lịch chiếu:", error);

@@ -4,7 +4,8 @@ const mongoose = require("mongoose");
 module.exports = {
   // get all bookings
   async getAllBookings() {
-    return Booking.find({ delete_date: null });
+    const currentDate = new Date()
+    return Booking.find({ delete_date: null, opening_date: { $gte: currentDate } });
   },
 
   // create
