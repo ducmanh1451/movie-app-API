@@ -4,12 +4,14 @@ const mongoose = require("mongoose");
 module.exports = {
   // get all movies
   async getAllMovies() {
-    return Movie.find({ delete_date: null });
+    const currentDate = new Date()
+    return Movie.find({ delete_date: null, expected_end_date: { $gte: currentDate } });
   },
 
   // get showing movies
   async getShowingMovies() {
-    return Movie.find({ delete_date: null, movie_type: 1 });
+    const currentDate = new Date()
+    return Movie.find({ delete_date: null, movie_type: 1, expected_end_date: { $gte: currentDate } });
   },
 
   // get upcoming movies
