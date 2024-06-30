@@ -25,6 +25,10 @@ const customerSchema = new mongoose.Schema({
   address: {
     type: String,
   },
+  // refresh_token: {
+  //   type: String,
+  //   default: '',
+  // },
   create_date: {
     type: Date,
   },
