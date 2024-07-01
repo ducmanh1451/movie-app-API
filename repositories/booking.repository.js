@@ -4,8 +4,11 @@ const mongoose = require("mongoose");
 module.exports = {
   // get all bookings
   async getAllBookings() {
-    const currentDate = new Date()
-    return Booking.find({ delete_date: null, opening_date: { $gte: currentDate } });
+    const currentDate = new Date();
+    return Booking.find({
+      delete_date: null,
+      opening_date: { $gte: currentDate },
+    });
   },
 
   // create
@@ -109,5 +112,41 @@ module.exports = {
   // find booking by id
   async findBooking(bookingId) {
     return Booking.find({ _id: bookingId, delete_date: null });
+  },
+
+  // update seats status
+  async updateSeatsStatus(bookingId, seats, customer) {
+    const session = await mongoose.startSession();
+    session.startTransaction();
+    try {
+      return await Booking.updateMany(
+        {
+          _id: bookingId,
+          seats: {
+            $elemMatch: { seat_id: { $in: seats.map((seat) => seat.seat_id) } },
+          },
+        },
+        {
+          $set: {
+            "seats.$[elem].booking": true,
+            "seats.$[elem].customer": {
+              customer_id: customer.customer_id,
+              email: customer.email,
+              customer_name: customer.customer_name,
+              payment_status: true, // đang set cứng
+            },
+          },
+        },
+        {
+          arrayFilters: [
+            { "elem.seat_id": { $in: seats.map((seat) => seat.seat_id) } },
+          ],
+        }
+      );
+    } catch (error) {
+      await session.abortTransaction();
+      session.endSession();
+      throw error;
+    }
   },
 };

@@ -54,4 +54,17 @@ module.exports = (bookingRepo) => ({
       res.status(500).json({ error: error });
     }
   },
+
+  // update seats status
+  async updateSeatsStatus(req, res) {
+    try {
+      const bookingId = req.body.booking_id;
+      const seats = req.body.seats;
+      const customer = req.body.customer;
+      await bookingRepo.updateSeatsStatus(bookingId, seats, customer);
+      res.status(200).json({});
+    } catch (error) {
+      res.status(500).json({ error: error });
+    }
+  },
 });

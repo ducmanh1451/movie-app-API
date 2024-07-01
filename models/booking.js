@@ -75,6 +75,25 @@ const bookingSchema = new mongoose.Schema({
         type: Number,
         required: true,
       },
+      customer: {
+        customer_id: {
+          type: String,
+        },
+        email: {
+          type: String,
+        },
+        customer_name: {
+          type: String,
+        },
+        payment_status: {
+          type: Boolean,
+        },
+      },
+      booking: {
+        type: Boolean,
+        required: true,
+        default: false,
+      },
     },
   ],
   rows: {
