@@ -5,11 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"npm run start-movie-management-service\" \"npm run start-booking-service\" \"npm run start-helpers-service\" \"npm run start-auth-service\"",
+    "dev": "concurrently \"npm run start-movie-management-service\" \"npm run start-booking-service\" \"npm run start-helpers-service\" \"npm run start-auth-service\" \"npm run start-user-service\"",
     "start-movie-management-service": "nodemon services/movie-management-service/config/app.js",
     "start-booking-service": "nodemon services/booking-service/config/app.js",
     "start-helpers-service": "nodemon services/helpers-service/config/app.js",
-    "start-auth-service": "nodemon services/auth-service/config/app.js"
+    "start-auth-service": "nodemon services/auth-service/config/app.js",
+    "start-user-service": "nodemon services/user-service/config/app.js"
   },
   "keywords": [],
   "author": "",
