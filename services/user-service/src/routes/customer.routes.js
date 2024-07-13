@@ -6,5 +6,6 @@ const verifyToken = require("../../../../middlewares/auth-customer.middleware");
 // customer API
 router.get("/customer/:_id", verifyToken, controller.findCustomer);
 router.put("/customer/:_id", verifyToken, controller.updateCustomer);
+router.put("/customer/:_id/history", verifyToken, controller.updateHistoryCustomer);
 
 module.exports = router;

@@ -62,7 +62,8 @@ module.exports = (bookingRepo) => ({
       const seats = req.body.seats;
       const customer = req.body.customer;
       await bookingRepo.updateSeatsStatus(bookingId, seats, customer);
-      res.status(200).json({});
+      const booking = await bookingRepo.findBooking(bookingId);
+      res.status(200).json({ payload: booking });
     } catch (error) {
       res.status(500).json({ error: error });
     }

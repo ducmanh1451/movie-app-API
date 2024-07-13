@@ -58,4 +58,36 @@ module.exports = (userRepo) => ({
       res.status(500).json({ error: error });
     }
   },
+
+  // update history customer
+  async updateHistoryCustomer(req, res) {
+    try {
+      const customerId = req.params._id;
+      const {
+        booking_id,
+        cinema_name,
+        room_name,
+        movie_name,
+        opening_start_time,
+        opening_end_time,
+        seats,
+      } = req.body;
+
+      const currentDateTime = new Date();
+      await userRepo.updateHistoryCustomer(customerId, {
+        booking_id,
+        cinema_name,
+        room_name,
+        movie_name,
+        opening_start_time,
+        opening_end_time,
+        seats,
+        booking_date: currentDateTime,
+      });
+
+      res.status(200).json({});
+    } catch (error) {
+      res.status(500).json({ error: error });
+    }
+  },
 });
