@@ -29,6 +29,38 @@ const customerSchema = new mongoose.Schema({
   //   type: String,
   //   default: '',
   // },
+  booking_history: {
+    booking_id: {
+      type: String,
+    },
+    cinema_name: {
+      type: String,
+    },
+    room_name: {
+      type: String,
+    },
+    movie_name: {
+      type: String,
+    },
+    opening_start_time: {
+      type: Date,
+    },
+    opening_end_time: {
+      type: Date,
+    },
+    seats: {
+      seat_id: {
+        type: String,
+      },
+      price: {
+        type: Number,
+      },
+    },
+    booking_date: {
+      type: Date,
+    },
+  },
+
   create_date: {
     type: Date,
   },

@@ -25,4 +25,21 @@ module.exports = {
       throw error;
     }
   },
+
+  // update history customer
+  async updateHistoryCustomer(_id, data) {
+    const session = await mongoose.startSession();
+    session.startTransaction();
+    try {
+      return await Customer.findByIdAndUpdate(
+        _id,
+        { $push: { booking_history: data } },
+        { new: true }
+      );
+    } catch (error) {
+      await session.abortTransaction();
+      session.endSession();
+      throw error;
+    }
+  },
 };
