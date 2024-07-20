@@ -11,6 +11,17 @@ module.exports = (movieRepo) => ({
     }
   },
 
+  // find movie
+  async findMovie(req, res) {
+    try {
+      const _id = req.params._id;
+      const movie = await movieRepo.findMovie(_id);
+      res.status(200).json({ payload: movie });
+    } catch (error) {
+      res.status(500).json({ error: error });
+    }
+  },
+
   // get showing movies
   async getShowingMovies(req, res) {
     try {
@@ -46,6 +57,7 @@ module.exports = (movieRepo) => ({
         movie_duration,
         content,
         poster,
+        trailer
       } = req.body;
       const currentDateTime = new Date();
       
@@ -62,6 +74,7 @@ module.exports = (movieRepo) => ({
         movie_duration,
         content,
         poster,
+        trailer,
         create_date: currentDateTime,
         update_date: null,
         delete_date: null,
@@ -88,6 +101,7 @@ module.exports = (movieRepo) => ({
         expected_end_date,
         content,
         poster,
+        trailer
       } = req.body;
 
       const currentDateTime = new Date();
@@ -103,6 +117,7 @@ module.exports = (movieRepo) => ({
         movie_duration,
         content,
         poster,
+        trailer,
         update_date: currentDateTime,
       });
       res.status(200).json({});

@@ -8,6 +8,11 @@ module.exports = {
     return Movie.find({ delete_date: null, expected_end_date: { $gte: currentDate } });
   },
 
+  // find movie
+  async findMovie(_id) {
+    return Movie.find({ _id: _id });
+  },
+
   // get showing movies
   async getShowingMovies() {
     const currentDate = new Date()
