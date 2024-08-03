@@ -11,6 +11,30 @@ module.exports = (userRepo) => ({
     }
   },
 
+  // get staffs by authority
+  async getStaffsByAuthority(req, res) {
+    try {
+      const userId = req.params._id;
+      const staffLogin = await userRepo.findStaffByUserId(userId);
+      let staffs = [];
+      const authority = staffLogin[0]["authority"];
+      const belong_cinema = staffLogin[0]["belong_cinema"];
+      if (authority == 1) {
+        staffs = await userRepo.getAllStaffs();
+      }
+      if (authority == 2) {
+        const authStaffs = await userRepo.getStaffsByAuthority(3, belong_cinema);
+        staffs = staffLogin.concat(authStaffs);
+      }
+      if (authority == 3) {
+        staffs = staffLogin;
+      }
+      res.status(200).json({ payload: staffs });
+    } catch (error) {
+      res.status(500).json({ error: error });
+    }
+  },
+
   // create staff
   async createStaff(req, res) {
     try {

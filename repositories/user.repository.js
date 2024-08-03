@@ -50,7 +50,14 @@ module.exports = {
 
   // get all staffs
   async getAllStaffs() {
-    return Staff.find({ delete_date: null, authority: { $ne: 1 } });
+    return Staff.find({ delete_date: null });
+  },
+  // get staffs by authority
+  async getStaffsByAuthority(authority, belong_cinema) {
+    return Staff.find({ delete_date: null, authority: authority, belong_cinema: belong_cinema });
+  },
+  async findStaffByUserId(userId) {
+    return Staff.find({ delete_date: null, user_id: userId });
   },
 
   // create staff

@@ -1,4 +1,5 @@
 const Customer = require("./../models/customer");
+const Staff = require("./../models/staff");
 const mongoose = require("mongoose");
 
 module.exports = {
@@ -58,7 +59,7 @@ module.exports = {
     try {
       return await Customer.findByIdAndUpdate(
         customer_id,
-        { refresh_token: '' },
+        { refresh_token: "" },
         { new: true }
       );
     } catch (error) {
@@ -66,5 +67,14 @@ module.exports = {
       session.endSession();
       throw error;
     }
+  },
+
+  ////////////////
+  // STAFF
+  ////////////////
+
+  // find staff by user_id
+  async findStaffByUserId(user_id) {
+    return await Staff.findOne({ user_id: user_id, delete_date: null });
   },
 };
